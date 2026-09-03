@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
@@ -8,16 +8,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>MindAR Image Tracking Test</title>
-
-
-<!-- A-Frame -->
 <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
-
-<!-- MindAR -->
 <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-
 
 
 <style>
@@ -33,39 +26,18 @@ body {
 
     overflow:hidden;
 
-    background:black;
-
 }
 
 
+a-scene {
 
-#status {
+    position:absolute !important;
 
-    position:fixed;
+    top:0;
+    left:0;
 
-    top:20px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    z-index:9999;
-
-
-    background:rgba(0,0,0,0.8);
-
-    color:white;
-
-
-    padding:12px 20px;
-
-
-    border-radius:20px;
-
-
-    font-family:Arial;
-
-    font-size:16px;
+    width:100% !important;
+    height:100% !important;
 
 }
 
@@ -80,70 +52,48 @@ body {
 <body>
 
 
-
-<div id="status">
-
-Starting camera...
-
-</div>
-
-
-
-
-
 <a-scene
+
 
 mindar-image="
 imageTargetSrc: ./targets.mind;
-maxTrack: 1;
-facingMode: environment;
 "
 
 embedded
 
+
 color-space="sRGB"
 
+
 renderer="
-colorManagement: true;
-physicallyCorrectLights: true;
+colorManagement:true;
 "
+
 
 vr-mode-ui="enabled:false"
 
+
 device-orientation-permission-ui="enabled:false"
+
 
 >
 
 
 
-<!-- CAMERA -->
+<a-camera></a-camera>
 
-
-<a-camera
-position="0 0 0"
-look-controls="enabled: false">
-</a-camera>
-
-
-
-
-
-<!-- IMAGE TARGET -->
 
 
 <a-entity
-
-id="target"
 
 mindar-image-target="targetIndex: 0"
 
 >
 
 
-<!-- TEST OBJECT -->
-
-
 <a-box
+
+color="red"
 
 position="0 0 0"
 
@@ -151,88 +101,19 @@ width="1"
 
 height="1"
 
-depth="1"
-
-color="blue"
-
-opacity="0.8"
-
->
+depth="1">
 
 </a-box>
-
 
 
 </a-entity>
 
 
 
-
-
 </a-scene>
 
 
-
-
-
-
-
-<script>
-
-
-const target = document.querySelector("#target");
-
-
-const status = document.querySelector("#status");
-
-
-
-
-
-target.addEventListener("targetFound",()=>{
-
-
-console.log("TARGET FOUND");
-
-
-status.innerHTML="TARGET FOUND ✅";
-
-
-});
-
-
-
-
-
-target.addEventListener("targetLost",()=>{
-
-
-console.log("TARGET LOST");
-
-
-status.innerHTML="Point camera at target";
-
-
-});
-
-
-
-
-
-window.addEventListener("load",()=>{
-
-
-status.innerHTML="Point camera at target";
-
-
-});
-
-
-
-</script>
-
-
-
 </body>
+
 
 </html>
