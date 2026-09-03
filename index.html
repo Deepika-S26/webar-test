@@ -82,7 +82,21 @@ a-scene {
 
 
 </a-scene>
+<script>
 
+const target = document.querySelector(
+"[mindar-image-target]"
+);
+
+target.addEventListener("targetFound", () => {
+    console.log("TARGET FOUND");
+});
+
+target.addEventListener("targetLost", () => {
+    console.log("TARGET LOST");
+});
+
+</script>
 
 </body>
 
